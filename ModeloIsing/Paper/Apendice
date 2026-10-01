@@ -1,0 +1,194 @@
+\section{Preguntas Conceptuales}
+
+\subsection*{Pregunta 1}
+\textit{¿Cómo afectan las condiciones de frontera a la forma de $M_s(T)$ y
+$\chi_s(T)$ cerca de la transición? ¿Qué condición de frontera se asemeja más
+al límite termodinámico y por qué?}
+
+Las condiciones de frontera periódicas y libres afectan de manera directa
+tanto la forma como la posición aparente de la transición en $M_s(T)$ y
+$\chi_s(T)$. Con frontera libre, los espines ubicados en el borde de la red
+poseen menos vecinos que los del interior y, dado el orden de franjas
+favorecido por $|J_2/J_1|=0.6$, pierden además la contribución de segundos
+vecinos diagonales que estabiliza dicho orden, lo que reduce el costo
+energético local de voltearlos y los hace perder el orden a temperaturas más
+bajas que el resto de la red. El resultado observado es una caída de $M_s(T)$
+más suave y ligeramente desplazada hacia temperaturas menores, junto con un
+pico de $\chi_s(T)$ más bajo, más ancho y con mayor dispersión estadística, en
+comparación con la frontera periódica. La condición periódica, al asignar a
+todos los espines exactamente el mismo número de vecinos sin excepción,
+elimina por completo este efecto de superficie y reproduce de forma más fiel
+la física de un sistema homogéneo e infinito en todas direcciones. Por esta
+razón, la frontera periódica se asemeja más al límite termodinámico
+$L\to\infty$: en un sistema real macroscópico, la fracción de átomos ubicados
+en la superficie respecto al volumen total es despreciable, situación que la
+frontera periódica reproduce de manera exacta incluso en una red pequeña,
+mientras que la frontera libre sobreestima artificialmente la importancia
+relativa de esos efectos de borde en un sistema de tamaño finito.
+ 
+ \begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{MyX en la transicion.png}
+\caption{Magnetizacion de Subred Y Suscebtibilidad Magnetica. Comparacion entre condiciones de frontera libres y condiciones de frontera periodicas para L=24}
+\label{fig:grafica4}
+\end{figure}
+
+\subsection*{Pregunta 2}
+\textit{Usando el Cumulante de Binder $U(T)$, determine la temperatura de
+Néel $T_N$ para cada condición de frontera. ¿Qué método ($T$ del pico de
+$\chi_s$ o cruce de $U$) da una estimación más estable? Justifique su
+respuesta.}
+
+El cruce de las curvas $U(T)$ para $L=16$ y $L=24$ permite estimar
+$T_N^{PBC}\approx0.97\,J_1/k_B$ para frontera periódica, y un valor
+ligeramente menor, $T_N^{free}\approx0.93\,J_1/k_B$, para frontera libre,
+consistente con el corrimiento hacia temperaturas menores discutido en la
+Pregunta 1. Comparando este método contra la localización del máximo de
+$\chi_s(T)$, el cruce del cumulante de Binder resulta ser una estimación
+considerablemente más estable frente al ruido estadístico propio del muestreo
+Monte Carlo. La razón física de esta diferencia radica en la naturaleza de
+cada cantidad: $\chi_s$ es una varianza absoluta, cuya magnitud depende
+fuertemente del tamaño del sistema y cuyo máximo, al ser un extremo de una
+curva con ruido estadístico superpuesto, puede desplazarse de forma
+apreciable de una corrida a otra, especialmente si el número de muestras
+cerca de la transición no es suficientemente grande. El cumulante de Binder,
+en cambio, es un cociente de momentos, una cantidad adimensional cuyo valor
+en cada fase está fijado por argumentos generales de la forma de la
+distribución de $M_s$ (gaussiana en la fase desordenada, distribución
+concentrada en la fase ordenada), y no por la escala absoluta de las
+fluctuaciones. Esto hace que $U(T)$ varíe de forma mucho más suave con el
+ruido estadístico, y que su punto de cruce entre distintos tamaños de red sea
+un estimador más robusto y reproducible de $T_N$ que la posición de un pico.
+
+ 
+ \begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{TN en xm o U.png}
+\caption{Comparacion de metodos para toma de la Temperatura de Neel en condiciones de frontera Libres.}
+\label{fig:grafica4}
+\end{figure}
+
+En las graficas para las condiciones de frontera libres, por ejemplo, el pico de $\chi_s$ esta desplazado respecto al verdadero $T_N$, pues es un sistema finito. Esto es consecuencia del escalamiento de tamaño finito, donde la posición del máximo de $\chi_s$ converge a $T_N$ solo en el límite $L\to\infty$, con corrección $\sim L^{-1/\nu}$. Mientras tanto , en el cruce de Binder se tiene una estimación más directa.
+
+\subsection*{Pregunta 3}
+\textit{¿Por qué el efecto magnetocalórico (máximo en $|\Delta S_M|$) ocurre
+cerca de $T_N$? Relacione esto con la física de la transición de fase.}
+
+El máximo del efecto magnetocalórico, medido como el pico de
+$|\Delta S_M(T)|$, ocurre cerca de $T_N$ porque la relación
+de Maxwell conecta directamente $\Delta S_M$ con la derivada de la
+magnetización respecto a la temperatura, $(\partial M/\partial T)_h$. Esta
+derivada alcanza su valor máximo exactamente donde el sistema es más sensible
+a variaciones de temperatura, es decir, donde la susceptibilidad magnética, una medida directa de esa sensibilidad, también es máxima, esto es, en la temperatura de Neel. Físicamente, en la transición de fase el sistema se encuentra en un estado de indecisión entre el orden y el desorden, en el que dominios de ambos tipos coexisten a muchas escalas y una pequeña perturbación externa, por ejemplo el campo $h$, puede inclinar de forma desproporcionada el balance hacia el estado alineado.
+
+\subsection*{Pregunta 4}
+\textit{¿Qué implicación tiene el RCP para una posible
+aplicación como refrigerante magnético? Compare cualitativamente con la
+magnitud del RCP reportada en el artículo para el modelo de Heisenberg.}
+
+A partir del pico de $|\Delta S_M(T,h=0.5)|=0.9053\,k_B$ y su ancho a media
+altura $FWHM=0.5834\,J_1/k_B$, se obtuvo $RCP=0.5281\,k_B$ (Ver figura4). Este valor
+combina en una sola cifra la intensidad del efecto en su punto máximo con la
+extensión en temperatura sobre la cual dicho efecto permanece apreciable, y
+resulta de un pico de magnitud e intensidad moderadas, propio de una
+transición de segundo orden donde el cambio de entropía se distribuye de
+forma continua en una región relativamente amplia cerca de $T_N$, en
+lugar de concentrarse en un pico abrupto y estrecho como ocurriría en una
+transición de primer orden. Desde el punto de vista de una posible aplicación
+tecnológica, un RCP de esta naturaleza, sería preferible a un pico extremadamente agudo, ya que un refrigerante magnético real necesita mantener parte de su
+efectividad incluso ante pequeñas desviaciones de la temperatura de operación
+respecto al punto óptimo, en lugar de perder abruptamente su funcionalidad
+fuera de una ventana de temperatura muy estrecha. Cualitativamente se nota un resultado similar con respecto a el modelo de Heisenberg, RCP es un valor cercano al FWHM, lo que implica un rango de temperaturas relativamente amplio para el efecto magnetocalorico.
+
+\subsection*{Pregunta 5}
+\textit{¿Cómo esperaría que $M_s(T)$ y $\chi_s(T)$ cambien a medida que
+$L\to\infty$? Discuta si los valores de $T_N$ encontrados para $L=24$ son una
+buena aproximación al valor del límite termodinámico.}
+
+Al aumentar $L$, se espera que $M_s(T)$ mantenga su forma general pero con
+una caída cada vez más abrupta en la vecindad de $T_N$, aproximándose en el
+límite $L\to\infty$ a una verdadera discontinuidad en la pendiente
+característica de una transición de fase genuina; de manera análoga, se
+espera que el pico de $\chi_s(T)$ se vuelva progresivamente más alto y más
+estrecho, divergiendo formalmente en el límite termodinámico según la ley de
+escala $\chi_s^{max}\sim L^{\gamma/\nu}$ . Este comportamiento ya es
+parcialmente visible al comparar $L=16$ con $L=24$ en los resultados
+obtenidos: el pico de $\chi_s$ para $L=24$ es más alto y más estrecho que
+para $L=16$ (Ver figura 2). 
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Tamaño & $\chi_s^{max}$ & Ancho del pico (FWHM) \\
+\hline
+L=16 & $\approx20$ & $\approx0.2$ \\
+L=24 & $\approx40$ & $\approx0.1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+Respecto a si $T_N$ obtenida con $L=24$ es una buena
+aproximación al valor del límite termodinámico, la respuesta es que
+constituye una aproximación razonable pero no exacta: las correcciones de
+tamaño finito a la posición aparente de la transición decaen típicamente como
+una ley de potencias en $L$ (usualmente $\sim L^{-1/\nu}$), de modo que el
+valor verdadero de $T_N$ en el límite $L\to\infty$ se obtiene formalmente
+extrapolando los cruces del cumulante de Binder obtenidos para varios tamaños
+crecientes, y no simplemente tomando el resultado del tamaño más grande
+disponible como definitivo. Con solo dos tamaños de red (16 y 24), la
+estimación obtenida es una buena primera aproximación, pero conllevaría una
+incertidumbre sistemática que solo podría acotarse con más tamaños de red en
+el estudio.
+
+\subsection*{Pregunta 6}
+\textit{El artículo original usa un modelo de Heisenberg 3D y encuentra
+exponentes críticos de la clase de universalidad de Ising 3D. En nuestro
+modelo de Ising 2D, ¿esperaría que los exponentes críticos (ej. $\beta$)
+fueran los mismos? Justifique su respuesta basándose en la teoría de grupos
+de renormalización y las clases de universalidad. ¿Por qué los autores del
+artículo pudieron usar un modelo 3D pero obtener exponentes de Ising?}
+
+No se esperaría que los exponentes críticos del modelo de Ising 2D coincidan
+con los del modelo de Heisenberg 3D reportados en el artículo base, y la
+razón se fundamenta directamente en la teoría de grupos de renormalización y
+el concepto de clase de universalidad. Según esta teoría, el comportamiento
+crítico de un sistema cerca de una transición de fase continua está
+determinado únicamente por un conjunto reducido de propiedades: la
+dimensionalidad espacial del sistema $d$, la dimensionalidad del parámetro de
+orden, que es el número de componentes del vector de espín, $n$, y el alcance de las
+interacciones, sin depender de los detalles microscópicos específicos del
+Hamiltoniano. El modelo de Ising 2D tiene $d=2$ y $n=1$. El modelo de
+Heisenberg 3D del material real tiene, en cambio, $d=3$ y $n=3$ (espines
+vectoriales), lo cual en principio correspondería a la clase de universalidad
+de Heisenberg tridimensional, con exponentes críticos distintos a los del
+Ising 3D o el Ising 2D.
+
+\begin{center}
+\begin{tabular}{lccccc}
+\hline
+Modelo & $d$ & $n$ & $\beta$ & $\gamma$ & $\alpha$ \\
+\hline
+Ising 2D  & 2 & 1 & $0.125$ & $1.75$ & $0$ (logarítmico) \\
+Ising 3D & 3 & 1 & $\approx0.326$ & $\approx1.237$ & $\approx0.110$ \\
+Heisenberg 3D  & 3 & 3 & $\approx0.365$ & $\approx1.386$ & $\approx-0.12$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Los autores del artículo original han encontrado exponentes
+críticos de la clase de universalidad de Ising 3D, a pesar de partir de un
+modelo de espín vectorial tipo Heisenberg, debido a la presencia de
+anisotropía magnética en el material real: cuando las interacciones
+espín-órbita o el entorno cristalino favorecen fuertemente una dirección
+particular de alineación de los espines sobre las demás, el sistema
+efectivamente pierde sus grados de libertad transversales de espín a bajas
+energías, y su comportamiento crítico converge hacia el de un sistema con
+parámetro de orden escalar ($n=1$) en tres dimensiones ($d=3$), es decir,
+hacia la clase de universalidad de Ising 3D, aunque el Hamiltoniano
+microscópico original tuviera simetría de Heisenberg. El modelo de
+Ising 2D captura la física cualitativa de la competencia $J_1$-$J_2$ y de la
+existencia de una transición de fase, pero por tener una dimensionalidad
+distinta ($d=2$ en vez de $d=3$) pertenece a una clase de universalidad
+diferente, y por tanto no reproduce cuantitativamente los mismos exponentes críticos que el sistema real.
+
