@@ -1,0 +1,34 @@
+\documentclass[twocolumn,showpacs,preprintnumbers,amsmath,amssymb,aps,prb]{revtex4-1}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{float}
+
+\begin{document}
+
+\title{Simulación Monte Carlo de las Propiedades Magnéticas y Efecto Magnetocalórico en un Antiferromagneto Tipo-A: Estudio del Modelo de Ising 2D}
+
+\author{Sofía Moscoso Ortiz, Mario César Barrera Salas}
+\affiliation{Instituto de Física, Universidad de Antioquia}
+\date{\today}
+
+\begin{abstract}
+En este trabajo se estudian las propiedades magnéticas y el efecto magnetocalórico (EMC) en un modelo de Ising 2D sobre una red cuadrada que representa la física esencial de un antiferromagneto tipo-A. Mediante simulaciones de Monte Carlo empleando el algoritmo de Metrópolis, se analizan el parámetro de orden magnetización de subred $M_s$, la susceptibilidad $\chi_s$, el calor específico $C_v$ y el cumulante de Binder $U$ bajo condiciones de frontera periódicas y libres para tamaños de red de $L=16$ y $L=24$. Se determina la temperatura de Néel ($T_N$) y se evalúa la variación de entropía magnética ($\Delta S_M$) y el poder de enfriamiento relativo (RCP) mediante la relación de Maxwell. Ademas, Se hace una comparacion de este modelo Ising 2D con el modelo de Heisenberg 3D. 
+\end{abstract}
+\maketitle
+
+
+\input{01_introduction}
+\input{02_resultados}
+\input{03_conclusiones}
+\input{04_referencias}
+
+\clearpage
+\appendix
+\input{Apendice}
+
+\end{document}
