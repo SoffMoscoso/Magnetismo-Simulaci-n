@@ -1,0 +1,116 @@
+\section{Introducción}
+El estudio de los materiales con efecto magnetocalórico (EMC) ha cobrado gran relevancia debido a su aplicación potencial en la refrigeración magnética, una alternativa ecológica y eficiente frente a los sistemas tradicionales. Entre estas familias, las perovskitas de manganita de tierras raras ($R\text{MnO}_3$) destacan por su rica física fundamental y acoplamientos magneto-estructurales. En particular, compuestos como el $\text{GdMnO}_3$ muestran un ordenamiento antiferromagnético tipo-A caracterizado por planos ferromagnéticos (FM) acoplados de forma antiferromagnética (AFM).
+
+Aunque el sistema experimental real exige modelos tridimensionales continuos (como el modelo de Heisenberg 3D), la física del ordenamiento intra-plano y la competencia entre interacciones a primeros vecinos ($J_1 > 0$, FM) y segundos vecinos ($J_2 < 0$, AFM) pueden simplificarse a un modelo de Ising en 2D. Esta simplificación reduce sustancialmente el costo computacional sin perder la física de la transición de fase de segundo orden impulsada por fluctuaciones térmicas ni el comportamiento crítico del parámetro de orden.
+
+\section{Marco Teorico}
+Un material antiferromagnético es aquel en el que, por debajo de una temperatura crítica conocida como temperatura de Néel ($T_N$), los momentos magnéticos vecinos se ordenan de manera antiparalela como consecuencia de una interacción de intercambio de origen cuántico-electrostático cuyo signo favorece la anti-alineación. Esto contrasta con un ferromagneto, donde la misma interacción favorece la alineación paralela. Macroscópicamente, un antiferromagneto ideal no presenta magnetización neta espontánea, ya que las dos subredes de espines opuestos se cancelan entre sí; por esta razón, el parámetro de orden relevante no es la magnetización total, sino la magnetización de subred, que distingue explícitamente las subredes intercaladas y mide qué tan bien se conserva el patrón alternante de orientaciones.
+
+En materiales reales más complejos, como los óxidos tipo perovskita ($R\text{MnO}_3$) que motivan este trabajo, el ordenamiento magnético no es un antiferromagnetismo simple en las tres direcciones espaciales, sino que adopta la llamada estructura tipo-A: dentro de cada plano cristalográfico los espines se acoplan ferromagnéticamente, mientras que planos consecutivos se acoplan antiferromagnéticamente entre sí. El material se comporta, en esencia, como un apilamiento de capas ferromagnéticas cuya orientación se alterna de capa a capa. Este ordenamiento surge de la competencia entre dos interacciones de intercambio de distinto alcance y signo opuesto, una dentro del plano y otra entre planos, cuya tensión estabiliza el orden tipo-A frente a un ferromagnetismo o antiferromagnetismo simples.
+
+Reducir este problema tridimensional a una sola capa bidimensional, con dos interacciones de intercambio compitiendo dentro del mismo plano, permite capturar la física esencial de esa competencia con un costo computacional mucho menor. El Hamiltoniano de Ising que modela esta simplificación es
+
+$$H = -J_1\sum_{\langle i,j\rangle}S_iS_j - J_2\sum_{\langle\langle i,j\rangle\rangle}S_iS_j$$
+
+donde $S_i=\pm1$ son variables de espín de Ising, $\langle i,j\rangle$ denota primeros vecinos, $\langle\langle i,j\rangle\rangle$ denota segundos vecinos, $J_1>0$ representa el acoplamiento ferromagnético dentro del plano y $J_2<0$ el acoplamiento antiferromagnético asociado al acoplamiento entre capas. Aunque simplificado respecto al modelo de Heisenberg tridimensional del sistema real, este Hamiltoniano conserva el ingrediente físico esencial: la tensión entre una tendencia a alinearse y una tendencia a anti-alinearse entre distintos rangos de vecindad.
+
+A temperatura finita, el sistema no simplemente minimiza su energía interna, sino que minimiza la energía libre $F=E-TS$, lo que introduce una competencia entre el orden energéticamente favorable y el desorden favorecido entrópicamente. A $T=0$ el sistema ocupa el estado de mínima energía, y a medida que aumenta la temperatura, las fluctuaciones térmicas permiten que el sistema explore configuraciones de mayor energía, incrementando el desorden. En la simulación de Monte Carlo, esta competencia se implementa a través de la probabilidad de aceptación del algoritmo de Metrópolis,
+
+$$P(\text{aceptar}) = \min\left(1,\ e^{-\Delta E/k_BT}\right),$$
+
+que permite aceptar cambios de configuración energéticamente desfavorables con una probabilidad que depende de la temperatura. En la temperatura de Neel, $T_N$, el costo energético de desordenarse deja de compensarse con la ganancia entrópica de hacerlo, y el orden de largo alcance colapsa: esta es una transición de fase de segundo orden.
+
+El parámetro de orden que sigue esta transición es la magnetización de subred,
+
+$$M_s = \frac{1}{2N}\left|\sum_{i\in A}S_i - \sum_{j\in B}S_j\right|,$$
+
+que vale aproximadamente 1 a temperaturas bajas (orden casi perfecto) y decae continuamente hacia cero al cruzar $T_N$. Cerca de la transición, esta caída sigue un comportamiento de ley de potencias caracterizado por el exponente crítico $\beta$, de la forma $M_s\sim(T_N-T)^{\beta}$ para $T<T_N$. Que esta caída sea continua, y no abrupta, es precisamente la firma característica de una transición de segundo orden, en contraste con las transiciones de primer orden, donde el orden colapsa de forma discontinua.
+
+La susceptibilidad de subred y el calor específico no son cantidades promedio, sino medidas de fluctuación estadística, definidas respectivamente como
+
+$$\chi_s = \frac{N}{k_BT}\left(\langle M_s^2\rangle-\langle M_s\rangle^2\right), \qquad C_v = \frac{\langle E^2\rangle-\langle E\rangle^2}{Nk_BT^2}.$$
+
+Su origen físico se explica mediante el teorema de fluctuación-disipación, según el cual la manera en que un sistema responde a un estímulo externo está determinada por la magnitud de sus fluctuaciones espontáneas en equilibrio, por ejemplo, cómo cambia $M$ ante un campo, o cómo cambia $E$ ante un cambio de temperatura. Lejos de $T_N$, el sistema está "decidido", ya sea completamente ordenado o completamente desordenado, y sus fluctuaciones configuracionales son pequeñas. Justo en $T_N$, en cambio, el sistema es máximamente sensible: pequeños cambios de energía pueden inclinarlo entre configuraciones muy distintas, coexistiendo dominios ordenados y desordenados a muchas escalas, lo que se traduce en fluctuaciones anómalamente grandes de $M_s$ y $E$, y por tanto en picos pronunciados de $\chi_s$ y $C_v$ en la vecindad inmediata de $T_N$. En el límite termodinámico ($L\to\infty$) estos picos divergen; en un sistema finito se mantienen acotados, pero se estrechan y crecen en magnitud a medida que $L$ aumenta.
+
+El cumulante de Binder,
+
+$$U = 1-\frac{\langle M_s^4\rangle}{3\langle M_s^2\rangle^2},$$
+
+es una cantidad adimensional construida específicamente para eliminar la dependencia trivial con el tamaño del sistema cerca del punto crítico. En la fase ordenada, la distribución de $M_s$ se concentra en torno a un valor no nulo y $U\to2/3$; en la fase desordenada, $M_s$ se distribuye de forma aproximadamente gaussiana alrededor de cero y $U\to0$. La teoría de escalamiento de tamaño finito predice que, justo en $T_N$, $U$ se vuelve aproximadamente independiente de $L$, de modo que las curvas $U(T)$ calculadas para distintos tamaños de red se cruzan en un único punto que converge a $T_N$ conforme mejora la estadística del muestreo. Este método suele ser más robusto que localizar el máximo de $\chi_s$, ya que no depende de estimar con precisión la posición de un pico, sensible al ruido estadístico, sino únicamente de identificar un cruce entre curvas.
+
+
+
+Además de las cantidades termodinámicas usuales, las transiciones de fase de
+segundo orden se caracterizan por un conjunto de \textit{exponentes críticos}
+que describen cómo divergen o se anulan ciertas cantidades físicas en la
+vecindad inmediata de la temperatura crítica. El parámetro de orden se anula
+al aproximarse a la transición desde la fase ordenada según
+
+\begin{equation}
+M_s(T) \sim (T_N-T)^{\beta} \qquad \text{para } T<T_N,
+\end{equation}
+
+mientras que la susceptibilidad y el calor específico divergen al
+aproximarse a $T_N$ desde cualquiera de las dos fases, de acuerdo con
+
+\begin{equation}
+\chi_s(T) \sim |T-T_N|^{-\gamma}, \qquad C_v(T) \sim |T-T_N|^{-\alpha}.
+\end{equation}
+
+Estos exponentes no dependen de los detalles microscópicos particulares de
+cada sistema, sino únicamente de propiedades generales como la
+dimensionalidad espacial y la simetría del parámetro de orden, agrupando a
+sistemas físicamente muy distintos dentro de las mismas \textit{clases de
+universalidad}. Esta propiedad resulta central para comparar el modelo de
+Ising 2D empleado en este trabajo con el modelo de Heisenberg 3D del material
+real, y se retoma con mayor detalle en la discusión de resultados.
+
+
+
+\hspace{0.5cm}
+
+El efecto magnetocalórico es el fenómeno termodinámico por el cual la entropía magnética de un material cambia al aplicar o remover un campo magnético externo, lo que bajo condiciones adiabáticas, produce un cambio de temperatura en el material; esta es, precisamente, la base física de la refrigeración magnética como alternativa a los ciclos convencionales de compresión y expansión de gases. Al introducir un campo externo $h$ en el Hamiltoniano de Ising,
+
+$$H = -J_1\sum_{\langle i,j\rangle}S_iS_j - J_2\sum_{\langle\langle i,j\rangle\rangle}S_iS_j - h\sum_iS_i,$$
+
+el campo favorece energéticamente la alineación de los espines en su dirección, reduciendo el número de microestados accesibles y, con ello, la entropía magnética del sistema. La conexión cuantitativa entre este efecto y la magnetización total del sistema ($M$, no la de subred, ya que el campo externo no distingue entre subredes) se establece mediante una relación de Maxwell que vincula la variación de la entropía con el campo a la variación de la magnetización con la temperatura a campo constante,
+
+$$\left(\frac{\partial S}{\partial h}\right)_T = \left(\frac{\partial M}{\partial T}\right)_h.$$
+
+Integrando esta relación entre $h=0$ y un campo $h$ finito se obtiene el cambio de entropía magnética isotérmico,
+
+$$\Delta S_M(T,h) = \int_0^{h}\left(\frac{\partial M(T,h')}{\partial T}\right)_{h'}dh'.$$
+
+En la práctica experimental y de forma análoga en una simulación de Monte Carlo, esta integral se aproxima numéricamente a partir de mediciones de $M$ en un conjunto discreto de temperaturas y campos, usando una diferencia finita centrada,
+
+$$\Delta S_M(T,h)\approx\frac{1}{2\Delta T}\left[M(T+\Delta T,h)-M(T-\Delta T,h)\right],$$
+
+La magnitud de $\Delta S_M$ depende directamente de qué tan rápido cambia $M$ con la temperatura a campo fijo, es decir, de $(\partial M/\partial T)_h$; como ya se discutió, es precisamente cerca de la transición de fase donde el sistema es más sensible, la susceptibilidad es máxima, y por tanto donde $M(T)$ cambia más abruptamente. Este es el origen físico de un resultado general en materiales magnetocalóricos: el máximo cambio de entropía se obtiene en la vecindad de las transiciones de fase magnéticas, ya sea la temperatura de Curie en un ferromagneto o la temperatura de Néel en un antiferromagneto, porque el campo logra reordenar más eficazmente al sistema justo donde este se encuentra en la frontera entre el orden y el desorden térmico.
+
+Para cuantificar la utilidad práctica de un material magnetocalórico se define la capacidad de refrigeración relativa (RCP), calculada como el producto entre el valor máximo de $|\Delta S_M|$ y el ancho a media altura (FWHM) del pico de la curva $\Delta S_M(T)$; esta cantidad estima el calor que puede transferirse en un ciclo de refrigeración ideal entre los dos extremos de temperatura definidos por el FWHM, y constituye una de las figuras de mérito estándar usadas en la literatura para comparar distintos materiales candidatos a refrigerantes magnéticos.
+
+El modelo de Ising 2D con $J_1$ y $J_2$ competitivos, resuelto mediante el algoritmo de Metrópolis, permite entonces reproducir de forma simplificada pero físicamente consistente los elementos centrales del comportamiento de un antiferromagneto tipo-A: el colapso del orden de subred en $T_N$, los picos de fluctuación en $\chi_s$ y $C_v$ como firma microscópica de la transición, el cruce universal del cumulante de Binder como método robusto para localizar $T_N$, y finalmente el acoplamiento de un campo externo que permite estimar el efecto magnetocalórico y conectar la simulación computacional con una magnitud de interés tecnológico directo: la posible aplicación del material real como refrigerante magnético.
+
+
+\section{Metodología}
+Se consideran dos reds cuadradas 2D de tamaño $L \times L$ con L=16 y L=24 con espines $S_i = \pm 1$. El Hamiltoniano del sistema está dado por:
+\begin{equation}
+H = -J_1 \sum_{\langle i,j \rangle} S_i S_j - J_2 \sum_{\langle\langle i,j \rangle\rangle} S_i S_j - h \sum_i S_i,
+\end{equation}
+donde $\langle i,j \rangle$ representa la suma sobre primeros vecinos, $\langle\langle i,j \rangle\rangle$ sobre segundos vecinos, y $h$ es el campo magnético externo. En las simulaciones se fija la razón de competencia $J_2 / J_1 = -0.6$.
+
+Las simulaciones se ejecutan mediante el algoritmo de Metrópolis. Un paso Monte Carlo (MCS) equivale a $L*L$ intentos de volteo de espín. Para asegurar el equilibrio térmico, se descartan $N_{\text{term}}$ pasos iniciales de termalización, seguidos de $N_{\text{muestra}}$ pasos de muestreo para promediar las variables termodinámicas: La energía calculada a partir del hamiltoniano y la magnetizacion de subred ya definida anteriormente.
+
+Con estas variables obtenidas de la simulacion, se calculan los observables:
+
+\begin{itemize}
+    \item Susceptibilidad de subred ($\chi_s$): $\chi_s = \frac{N}{k_B T} (\langle M_s^2 \rangle - \langle M_s \rangle^2)$.
+    \item Cumulante de Binder ($U$): $U = 1 - \frac{\langle M_s^4 \rangle}{3 \langle M_s^2 \rangle^2}$.
+     \item Capacidad Calorifica ($C_v$): $C_v = \frac{\langle E^2\rangle-\langle E\rangle^2}{Nk_BT^2}$.
+    \item Variación de entropía magnética ($\Delta S_M$): calculada numéricamente con $M(T, h)$ mediante:
+    \begin{equation}
+    \Delta S_M(T, h) \approx \frac{1}{2\Delta T} [M(T+\Delta T, h) - M(T-\Delta T, h)].
+    \end{equation}
+\end{itemize}
+
+Se analizan dos redes de diferente tamaño con la intención de hallar la temperatura de Neel en la intersección de las curvas del cumulante de binder $U(T)$ y se busca diferenciar los resultados entre condiciones de frontera libres y condiciones de frontera periódicas. Finalmente se comparara el modelo de Ising 2D con el modelo de Heisenberg 3D estudiado en [1].
