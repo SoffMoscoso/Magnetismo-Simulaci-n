@@ -1,0 +1,45 @@
+\section{Conclusiones}
+
+Este trabajo mostró que un modelo de Ising 2D con interacciones competitivas
+$J_1$ ferromagnéticas de primeros vecinos y $J_2$ antiferromagnéticas de segundos vecinos es suficiente para reproducir, de forma simplificada pero
+físicamente consistente, los elementos centrales del comportamiento de un
+antiferromagneto tipo-A, evidenciando en este la existencia de una transición de fase de segundo orden bien definida, 
+el colapso continuo del orden de subred al cruzar la temperatura de Néel, y picos característicos de las cantidades de fluctuación ($\chi_s$ y $C_v$)
+en la vecindad de dicha transición. La determinación de $T_N$ mediante el cruce del cumulante de Binder para dos tamaños de red resultó ser un método 
+más robusto y reproducible que la localización directa del máximo de $\chi_s$, confirmando la ventaja práctica de un estimador basado en una cantidad 
+adimensional frente a uno basado en una varianza absoluta sensible al ruido estadístico del muestreo MonteCarlo.
+
+La comparación entre condiciones de frontera periódicas y libres
+evidenció que los efectos de superficie introducidos por la frontera libre, 
+compuesta de espines con menos vecinos y, por tanto, más fáciles de
+desordenar térmicamente, desplazan la transición hacia temperaturas menores
+y degradan la nitidez de los picos de $\chi_s$ y $C_v$, mientras que la
+frontera periódica, al eliminar por completo dichos bordes, ofrece una
+aproximación más fiel al comportamiento de un sistema homogéneo e infinito.
+La elección de condiciones de frontera entonces, no es un detalle técnico menor
+de la simulación, pues afecta directamente la calidad de la extrapolación al límite termodinámico.
+
+El análisis del efecto magnetocalórico, obtenido a partir de la relación de
+Maxwell aplicada a la magnetización total del sistema, confirmó que el
+cambio de entropía magnética se maximiza en la vecindad inmediata de $T_N$,
+consistente con el hecho de que la susceptibilidad, y por tanto la
+sensibilidad del sistema a un campo externo, también alcanza su máximo
+exactamente ahí. La capacidad de refrigeración relativa obtenida
+($RCP=0.5281\,k_B$) reflejó un efecto de magnitud moderada distribuido en
+una ventana de temperatura amplia alrededor de la transición, comportamiento 
+característico de una transición de fase continua de segundo orden.
+
+Finalmente, el ejercicio de comparar este modelo simplificado de Ising 2D con
+el modelo de Heisenberg 3D del material real (GdMnO$_3$ dopado con Ni)
+permitió ilustrar de manera concreta el alcance y las limitaciones de la
+teoría de universalidad en transiciones de fase: mientras que el modelo
+reducido reproduce cualitativamente la física esencial de la competencia
+$J_1$-$J_2$ y la existencia de una transición magnética con efecto
+magnetocalórico asociado, sus exponentes críticos pertenecen necesariamente a
+una clase de universalidad distinta a la del sistema tridimensional real.
+En conjunto, los resultados muestran que, aun partiendo de una simplificación considerable
+del sistema físico original, el modelo de Ising 2D constituye una herramienta pedagógica y 
+computacionalmente accesible para explorar fenómenos como el ordenamiento antiferromagnético tipo-A,
+la importancia de las condiciones de frontera en simulaciones de sistemas finitos, y la conexión física 
+entre transiciones de fase y efecto magnetocalórico, sin perder de vista que la extrapolación cuantitativa
+a un material real requiere considerar cuidadosamente la dimensionalidad y la simetría del parámetro de orden del sistema completo.
