@@ -1,0 +1,110 @@
+
+\section{Resultados y Discusión}
+
+\subsection{Energía y Magnetización de Subred}
+
+En la figura 1 observamos los valores de energía y magnetización configuracionales en función de la temperatura para ambas condiciones de frontera y tamaños de subred, resultados obtenidos de la simulación de Montecarlo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{Energy and Magnetization.png}
+\caption{Energía y Magnetización Configuracionales en función de la temperatura para condiciones de frontera libres y condiciones de frontera periódicas en mallas de tamaño 16x16 y 24x24.}
+\label{fig:grafica4}
+\end{figure}
+
+La energía por espín, $E(T)=\langle E\rangle/N$, muestra el comportamiento característico de un sistema magnético que transita de un estado ordenado a uno desordenado al aumentar la temperatura. Para ambas condiciones de frontera, la curva parte de valores cercanos al mínimo teórico esperado a temperaturas bajas (1.2J1), donde el sistema se encuentra congelado en el orden de Néel. Desde allí, aumenta progresivamente hacia valores mayores de energía conforme T crece, reflejando la creciente desalineación térmica de los espines. El aumento más pronunciado de E(T) ocurre en la vecindad de $T= 0.95 J1/kB - 1.00 J1/kB$, coincidiendo con la región donde se espera la transición de Néel, y es ahí donde la pendiente de la curva  alcanza su valor máximo.
+La energía obtenida con frontera libre es mayor que la obtenida con frontera periódica, para todo valor de T, pues los espines ubicados en el borde de una red con frontera libre poseen menos vecinos, por lo que contribuyen menos enlaces favorables al total, y además se voltean con mayor facilidad al tener un costo energético local menor. Este efecto es más notorio en L=16 que en L=24, ya que la fracción de espines de borde respecto al total decrece con el tamaño del sistema, acercando gradualmente el resultado de frontera libre al de frontera periódica a medida que L aumenta.
+
+La magnetización de subred Ms(T) a temperaturas bajas, se mantiene cercana a 1 para ambos tamaños de red y ambas condiciones de frontera, indicando un orden antiferromagnético casi perfecto. Al aproximarse a $T_N$,  Ms decae de forma continua, consistente con una transición de fase de segundo orden, hasta estabilizarse en valores pequeños mas no nulos a temperaturas altas, residuales propios del tamaño finito del sistema. Las curvas de frontera libre presentan una caída más suave y desplazada hacia temperaturas ligeramente menores que la de frontera periódica, además de mayor dispersión estadística punto a punto. Esto se debe a que los espines de borde, al estar más débilmente acoplados, pierden el orden antes que los del interior de la red, adelantando efectivamente el colapso aparente del orden global y añadiendo ruido adicional a la medición. La condición periódica, al eliminar los bordes y otorgar a todos los espines el mismo número de vecinos, produce una transición más nítida y coincide más de cerca con el comportamiento esperado en el límite termodinámico $L\to\infty$.
+
+\subsection{Susceptibilidad de Subred Y Capacidad Calorifica}
+
+La susceptibilidad de subred $X_s(T)$ y el calor específico $C_v(T)$ (Figura 2), calculados a partir de las fluctuaciones de $M_s$ y $E$ respectivamente, presentan ambos un pico pronunciado en la vecindad de $T_N$, consistente con el origen físico de estas cantidades como medidas de la respuesta del sistema descrita por el teorema de fluctuación-disipación. El pico de $X_s$ es más agudo y estrecho que el de $C_v$, y su posición constituye una primera estimación de la temperatura de Néel.
+
+Al comparar tamaños de red, es observable que el pico de $X_s$ para L=24 es más alto y más estrecho que para L=16, lo cual es el comportamiento esperado del escalamiento de tamaño finito, donde la divergencia de la susceptibilidad en el límite termodinámico se manifiesta en sistemas finitos como un máximo que crece con el tamaño de la red. Respecto a las condiciones de frontera, el pico obtenido con frontera libre es más bajo y más ancho, y se ubica en una posición ligeramente desplazada respecto al de frontera periódica, reflejo del mismo efecto de borde discutido para $E(T)$ y $M_s(T)$: la pérdida de vecinos en la superficie de la red suaviza la transición y reduce la coherencia del pico.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{Xm y CV.png}
+\caption{Susceptibilidad Magnetica de subred y Capacidad Calorifica en funcion de la temperatura para condiciones de frontera libres y condiciones de frontera periodicas en mallas de tamaño 16x16 y 24x24.}
+\label{fig:grafica4}
+\end{figure}
+
+
+
+\subsection{Cumulante de Binder}
+
+El cumulante de Binder $U(T)$ se comporta según lo esperado: para ambos tamaños de red, U se aproxima a 2/3 a temperaturas bajas (fase ordenada) y decae hacia valores cercanos a cero a temperaturas altas (fase desordenada), con una transición relativamente abrupta entre ambos regímenes. Al graficar U(T) para L=16 y L=24 en un mismo eje, ambas curvas se cruzan en un punto bien definido, del cual se extrae la estimación de la temperatura de Néel mediante frontera periódica: $T_N^{PBC} \approx 0.97\, J_1/k_B$. El mismo procedimiento aplicado a los datos de frontera libre produce un cruce ligeramente desplazado y con mayor incertidumbre asociada, $T_N^{free} \approx 0.93\, J_1/k_B$, consistente con el corrimiento hacia temperaturas menores ya observado en $M_s(T)$.
+Comparando ambos métodos de estimación de $T_N$ , el valor obtenido por el cruce del cumulante de Binder resulta más estable frente a variaciones en el número de muestras y en la semilla aleatoria que el valor obtenido a partir del máximo de s, pues al depender de una razón de momentos en lugar de una varianza absoluta, su comportamiento cerca de $T_N$ es menos sensible a las fluctuaciones estadísticas del muestreo Monte Carlo.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{U(T).png}
+\caption{Cumulante de Binder vs Temperatura para estimacion de la temperatura de Neel.}
+\label{fig:grafica4}
+\end{figure}
+
+\subsection{Efecto MagnetoCalorico}
+Para el sistema con frontera periódica y L=24, se calculó el cambio de entropía magnética $\Delta S_M$ a partir de la magnetización total obtenida en simulaciones con h=0 y con h=0.5. Con h=0,  $\Delta S_M$  se mantiene cercana a cero en la mayor parte del rango de temperaturas, tal como se espera por la simetría del sistema sin campo externo. Sin embargo, se observa un pequeño pico positivo localizado en la vecindad de $T_N$. Este pico  no corresponde a un efecto termodinámico real, sino a un efecto estadístico: las fluctuaciones de M son máximas justo en $T_N$ , lo que amplifica el error estadístico del promedio finito $\langle M\rangle$ y, con ello, el ruido en la derivada numérica utilizada para estimar $\Delta S_M$. Por otro lado, La curva obtenida con h=0.5 muestra un mínimo pronunciado cerca a la temperatura de Néel estimada mediante el cumulante de Binder. Este comportamiento corresponde a el efecto magnetocalórico:  el campo externo produce el mayor cambio de entropía justo donde el sistema es más sensible a perturbaciones, es decir, donde $\frac{\partial M}{\partial T}$
+ es máximo. 
+ 
+ \begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{efectomc.jpg}
+\caption{Efecto Magnetocalorico en una red L=24x24 con condiciones de frontera periodicas.}
+\label{fig:grafica4}
+\end{figure}
+
+A partir de la curva $\Delta S_M$(h=0.5), se identificó un valor máximo de $|\Delta S_M|$=0.9053 kB/espín, El ancho a media altura (FWHM) de este pico fue de 0.5834J1/kB, a partir del cual se calculó la capacidad de refrigeración relativa(RCP):
+
+\begin{table}[htbp]
+  \centering
+  \caption{Descripción del Efecto Magnetocalórico ($\Delta S_M$) en función de la temperatura $T$ para un sistema con tamaño $L=24$ y condición de frontera periódica.}
+  \label{tab:efecto_mc}
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+     h & $\Delta S_M|_m$ & FWHM  & RCP & $\Delta T$ \\
+    \hline
+     0.5 & 0.9053 & 0.5834  & 0.5281 & 0.6-0.9  \\
+    \hline
+ \end{tabular}
+\end{table}
+
+Este valor estima cualitativamente la cantidad de calor magnético que el sistema puede absorber o liberar en un ciclo de magnetización-desmagnetización que abarque el rango de temperaturas definido por el ancho a media altura. el efecto magneto-calórico no está concentrado en un pico extremadamente agudo, sino distribuido en una región razonablemente amplia cerca de $T_N$, comportamiento consistente con la naturaleza continua de una transición de fase de segundo orden. 
+
+\subsection{Comparación con el modelo de Heisenberg 3D}
+
+Desde un punto de vista cualitativo, las curvas obtenidas con el modelo de
+Ising 2D reproducen de forma notable el comportamiento reportado para el
+modelo de Heisenberg 3D del material real. Tanto la magnetización de subred
+$M_s(T)$ como la susceptibilidad $\chi_s(T)$ presentan formas equivalentes a
+las del artículo original: una caída continua del parámetro de orden hasta
+anularse en la vecindad de la transición, acompañada de un pico pronunciado
+de susceptibilidad exactamente en esa misma región, consistente con una
+transición de fase de segundo orden en ambos casos. El cumulante de Binder
+$U(T)$ también sigue la misma tendencia cualitativa --aproximándose a $2/3$
+en la fase ordenada y a $0$ en la fase desordenada, con un cruce bien
+definido entre tamaños de red--, aunque las curvas obtenidas en este trabajo
+presentan un nivel de ruido estadístico notoriamente mayor que el reportado
+en el modelo de Heisenberg 3D, atribuible tanto al menor número de muestras
+y tamaños de red empleados en esta simulación simplificada, como a la mayor
+sensibilidad estadística inherente a un sistema de menor dimensionalidad.
+
+En cuanto al efecto magnetocalórico, el ancho a media altura (FWHM) obtenido
+para el pico de $|\Delta S_M|$ resultó cercano en magnitud relativa al valor
+de RCP calculado, lo que indica que, al igual que en el modelo de Heisenberg
+3D, el efecto se distribuye en una ventana de temperaturas comparativamente
+amplia alrededor de $T_N$, en lugar de concentrarse en un pico abrupto y
+estrecho. Esta coincidencia cualitativa sugiere que, aunque el modelo de
+Ising 2D es una simplificación considerable del sistema real, logra capturar
+correctamente la naturaleza continua y de segundo orden de la transición
+magnética, así como su firma característica en el efecto magnetocalórico.
+
+A pesar de esta concordancia cualitativa notable, una comparación
+cuantitativa rigurosa mediante los exponentes críticos, en particular
+$\beta$, asociado al comportamiento de $M_s(T)$ cerca de $T_N$, no pudo
+establecerse con los datos disponibles en este estudio, dado que su
+determinación numérica confiable requiere un análisis de escalamiento de
+tamaño finito con un número mayor de tamaños de red y una estadística
+considerablemente más extensa que la empleada aquí. No obstante, la teoría de universalidad predice que dicho exponente debe diferir entre ambos modelos, ya que pertenecen a clases de universalidad distintas (Ising 2D frente a Ising 3D efectivo), como se discute en la Pregunta 6 del Apéndice A.
